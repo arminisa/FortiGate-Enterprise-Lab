@@ -4,7 +4,7 @@
 This project demonstrates the implementation of a secure, segmented enterprise network using a FortiGate Firewall (v7.6) simulated in GNS3. The objective was to enforce strict security boundaries, implement robust NAT policies, and secure traffic between three distinct zones: WAN (Internet), LAN (Internal Users), and DMZ (Servers).
 
 ## 🗺️ Network Topology
-*(عکس توپولوژی را اینجا آپلود کن)*
+
 ![Network Topology](images/topology.png)
 
 ## 📊 IP Addressing Schema
