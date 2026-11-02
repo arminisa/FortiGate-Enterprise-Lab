@@ -37,3 +37,15 @@ To prove that network segregation is working effectively, a ping test was initia
 ![DMZ to LAN Blocked](images/dmz-to-lan-blocked.png)
 
 
+
+### 4. VIP (Port Forwarding) Test - WAN to DMZ
+This screenshot demonstrates that an external client (Kali Linux in WAN) can successfully reach the DMZ web server (R1) via the FortiGate's WAN IP on port 8080. The HTTP `401 Unauthorized` response proves that the TCP connection was established and the router's web service is responding.
+
+![VIP Test](images/vip-test.png)
+
+
+### 4. VIP (Port Forwarding) Test - WAN to DMZ
+This screenshot demonstrates a successful HTTP request from an external client (Kali Linux in WAN) to the DMZ web server (Cisco R1). The request hits the FortiGate on port 8080, is translated via Virtual IP, and successfully retrieves the Cisco HTML page (`R1 Home Page`). This proves that Port Forwarding and WAN-to-DMZ policies are functioning correctly.
+
+![VIP Test](images/vip-test2.png)
+
