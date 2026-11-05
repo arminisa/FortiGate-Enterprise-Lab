@@ -37,13 +37,6 @@ To prove that network segregation is working effectively, a ping test was initia
 ![DMZ to LAN Blocked](images/dmz-to-lan-blocked.png)
 
 
-
-### 4. VIP (Port Forwarding) Test - WAN to DMZ
-This screenshot demonstrates that an external client (Kali Linux in WAN) can successfully reach the DMZ web server (R1) via the FortiGate's WAN IP on port 8080. The HTTP `401 Unauthorized` response proves that the TCP connection was established and the router's web service is responding.
-
-![VIP Test](images/vip-test.png)
-
-
 ### 4. VIP (Port Forwarding) Test - WAN to DMZ
 This screenshot demonstrates a successful HTTP request from an external client (Kali Linux in WAN) to the DMZ web server (Cisco R1). The request hits the FortiGate on port 8080, is translated via Virtual IP, and successfully retrieves the Cisco HTML page (`R1 Home Page`). This proves that Port Forwarding and WAN-to-DMZ policies are functioning correctly.
 
@@ -68,3 +61,24 @@ It was identified that the **FortiGate-VM Evaluation License** in GNS3 silently 
 
 *FortiGate Sniffer showing UDP 500 packets being received but dropped:*
 ![FortiGate Sniffer](images/ipsec-sniffer-fortigate.png)
+
+
+
+
+
+---
+
+### 6. Next-Generation Firewall (NGFW) - UTM Profiles
+To secure the network beyond basic IP/Port filtering, three UTM (Unified Threat Management) profiles were configured and applied to the LAN-to-WAN policy:
+*   **Web Filter (`Block SocialMedia`):** Configured with a Static URL Filter to block specific domains (e.g., instagram.com).
+*   **IPS (`Block Attacks`):** Configured to block Critical, High, and Medium severity signatures, as well as Botnet C&C connections.
+*   **AntiVirus (`Scan Downloads`):** Configured to scan HTTP and FTP traffic in Flow-based mode for malware.
+
+*UTM Security Profiles applied to the firewall policy:*
+![UTM Profiles](images/utm-profiles.png)
+
+---
+
+### 7. Configuration Backup
+The complete FortiGate configuration, including all interfaces, routing, policies, and UTM profiles, has been securely backed up using **SCP (Secure Copy Protocol)**. 
+The backup file is available in the project directory: [`configs/fortigate-full-config.txt`](configs/fortigate-full-config.txt)
