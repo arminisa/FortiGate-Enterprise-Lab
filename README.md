@@ -49,3 +49,22 @@ This screenshot demonstrates a successful HTTP request from an external client (
 
 ![VIP Test](images/vip-test2.png)
 
+
+
+### ⚠️ Note on IPsec VPN (Evaluation License Limitation)
+I configured an IPsec Dial-Up VPN (IKEv2) with EAP authentication to allow remote access. The client (StrongSwan on Kali Linux) and FortiGate were configured with matching Phase 1/Phase 2 proposals (3DES-SHA256). 
+
+**Troubleshooting Process:**
+Using `diagnose sniffer packet any 'udp port 500'` on the FortiGate, I confirmed that IKE packets from the client were successfully reaching the WAN interface. However, `diagnose debug application ike -1` showed no incoming IKE negotiations. 
+
+**Conclusion:**
+It was identified that the **FortiGate-VM Evaluation License** in GNS3 silently drops IPsec VPN traffic at the kernel level before it reaches the IKE daemon. This is a known limitation of the free evaluation version. The configuration was verified as correct and documented as a troubleshooting exercise.
+
+
+**Troubleshooting Evidence:**
+
+*Kali Linux Client stuck in CONNECTING state:*
+![Kali IPsec Status](images/ipsec-status-connecting.png)
+
+*FortiGate Sniffer showing UDP 500 packets being received but dropped:*
+![FortiGate Sniffer](images/ipsec-sniffer-fortigate.png)
